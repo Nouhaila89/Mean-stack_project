@@ -1,0 +1,100 @@
+<section style="margin-top: 130px;">
+    <div class="container">
+        <div class="site-main">
+            <div class="product-gallery">
+                <div class="single-image-wrapper">
+                    <img class="img-fluid" [src]="selectedImage" alt="">
+                </div>
+                <div class="product-thumbs">
+                    <ol class="gallery-thumbs">
+                        <li  *ngFor="let image of thumbnailImages; let i = index" (click)="changeImage(i)">
+                            <img class="img-fluid" [src]="image" alt="Image miniature {{i}}">
+                        </li>
+                       
+                    </ol>
+                </div>
+            </div>
+            <div class="product-info">
+                <h1 class="product-title">{{product.name}}</h1>
+                <div class="product-price">
+                    <strong>{{product.price}} TL</strong>
+                </div>
+                <div class="stock">
+                    <p>Quantité en stock :</p>
+                    <strong *ngIf="selectedSize === 'S'">{{ product.stockS }}</strong>
+                    <strong *ngIf="selectedSize === 'M'">{{ product.stockM }}</strong>
+                    <strong *ngIf="selectedSize === 'X'">{{ product.stockX }}</strong>
+                    <strong *ngIf="selectedSize === 'XL'">{{ product.stockXl }}</strong>
+                </div>
+                <div>
+                    <p>Taille</p>
+                    <div class="values-list">
+                        <span (click)="selectSize('S')" [ngClass]="{ 'active': selectedSize === 'S' }">S</span>
+                        <span (click)="selectSize('M')" [ngClass]="{ 'active': selectedSize === 'M' }">M</span>
+                        <span (click)="selectSize('X')" [ngClass]="{ 'active': selectedSize === 'X' }">X</span>
+                        <span (click)="selectSize('XL')" [ngClass]="{ 'active': selectedSize === 'XL' }">XL</span>
+                    </div>
+                </div>
+                <button (click)="addBasket(product._id, product.price)" class="btn btn-dark">AJOUTER AU PANIER</button>
+                <h4>Caractéristiques du produit</h4>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="reviews-wrapper">
+            <div class="col-md-8">
+                <div>
+                    <h2>Commentaires</h2>
+                </div>
+                <form #reviewsaddForm="ngForm" autocomplete="off" (ngSubmit)="addReviews(reviewsaddForm, product._id)">
+                    <input type="hidden" name="productId" [value]="product._id">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nom Prénom</label>
+                    <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    ngModel
+                    required
+                    #name
+                    minlength="3"
+                    class="form-control"
+                    [appValid]="name.validity.valid"
+                  />
+                  <div class="invalid-feedback">Le champ Nom Prénom est obligatoire !</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Votre Message</label>
+                    <textarea type="text"
+                    name="description"
+                    id="description"
+                    ngModel
+                    rows="4"
+                    required
+                    #description
+                    min="1"
+                    class="form-control"
+                    [appValid]="description.validity.valid">
+                    </textarea>
+                    <div class="invalid-feedback">Veuillez saisir une description</div>
+                  </div>
+                  <button class="btn btn-dark">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="reviews"  *ngFor="let review of reviews">
+            <div class="date-wrapper">
+                <div class="reviews-name">
+                    {{review.name}}
+                </div>
+                <div class="date">
+                    {{review.createdDate | date: 'dd.MM.yyyy'}}
+                </div>
+            </div>
+            <div class="reviews-comment">
+                {{review.description}}
+            </div>
+        </div>
+    </div>
+</section>

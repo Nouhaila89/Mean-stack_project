@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center" style="margin-top: 50px; margin-bottom: 50px; margin-top: 150px;">
+  <div style="width: 400px">
+    <div class="card" style="border-radius: 0;">
+      <div class="mt-4">
+        <h2 class="text-center">Se connecter</h2>
+      </div>
+      <div class="card-body">
+        <form
+          #loginForm="ngForm"
+          (ngSubmit)="login(loginForm)"
+          autocomplete="off"
+        >
+          <div class="form-group">
+            <label for="email" class="form-label">Adresse e-mail</label>
+            <input
+              class="form-control mt-2"
+              style="border-color: #212529"
+              type="email"
+              ngModel
+              name="email"
+              id="email"
+              required
+              email
+              #email
+              [appValid]="email.validity.valid"
+              style="border-radius: 0;"
+            />
+            <div class="invalid-feedback">Veuillez saisir une adresse e-mail valide !</div>
+          </div>
+          <div class="form-group mt-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+              class="form-control mt-2"
+              style="border-color: #212529"
+              type="password"
+              ngModel
+              name="password"
+              id="password"
+              required
+              #password
+              [appValid]="password.validity.valid"
+              style="border-radius: 0;"
+            />
+            <div class="invalid-feedback">Le champ du mot de passe ne peut pas être vide !</div>
+          </div>
+          <div class="form-group mt-2">
+            <button
+              [disabled]="!loginForm.valid"
+              class="btn btn-dark w-100 mt-3"
+              style="border-radius: 0;"
+            >
+              Se connecter
+            </button>
+            <a
+              routerLink="/register"
+              style="float: right; margin-top: 10px; color: #212529;"
+              >S'inscrire</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

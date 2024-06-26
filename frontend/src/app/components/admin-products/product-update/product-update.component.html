@@ -1,0 +1,167 @@
+<div class="content-wrapper row-center">
+  <div class="ml-4 mb-3">
+    <h3 style="font-size: 30px">Page de Modification de Produit</h3>
+  </div>
+  <div class="col-md-6 ml-3">
+    <form
+      #updateForm="ngForm"
+      autocomplete="off"
+      (ngSubmit)="update(updateForm)"
+    >
+      <div class="form-group">
+        <label for="name">Nom du Produit</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          [(ngModel)]="product.name"
+          required
+          #name
+          minlength="3"
+          class="form-control"
+          [appValid]="name.validity.valid"
+        />
+        <div class="invalid-feedback">Le nom du produit doit avoir au moins 3 caractères!</div>
+      </div>
+      <div class="form-group mt-2">
+        <label for="categoriesSelect">Catégories</label>
+        <select
+          class="form-control"
+          name="categoriesSelect"
+          id="categoriesSelect"
+          [(ngModel)]="product.categories"
+          multiple
+          #categoriesSelect
+        >
+          <option *ngFor="let category of categories" [value]="category._id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+      <div class="d-flex">
+        <div class="form-group mt-2 mr-2">
+          <label for="stockS">Stock Taille S</label>
+          <input
+            type="number"
+            name="stockS"
+            id="stockS"
+            [(ngModel)]="product.stockS"
+            required
+            #stockS
+            min="1"
+            class="form-control"
+            [appValid]="stockS.validity.valid"
+          />
+          <div class="invalid-feedback">Le stock du produit doit être au moins de 1!</div>
+        </div>
+        <div class="form-group mt-2 mr-2">
+          <label for="stockM">Stock Taille M</label>
+          <input
+            type="number"
+            name="stockM"
+            id="stockM"
+            [(ngModel)]="product.stockM"
+            required
+            #stockM
+            min="1"
+            class="form-control"
+            [appValid]="stockM.validity.valid"
+          />
+          <div class="invalid-feedback">Le stock du produit doit être au moins de 1!</div>
+        </div>
+        <div class="form-group mt-2 mr-2">
+          <label for="stockX">Stock Taille X</label>
+          <input
+            type="number"
+            name="stockX"
+            id="stockX"
+            [(ngModel)]="product.stockX"
+            required
+            #stockX
+            min="1"
+            class="form-control"
+            [appValid]="stockX.validity.valid"
+          />
+          <div class="invalid-feedback">Le stock du produit doit être au moins de 1!</div>
+        </div>
+        <div class="form-group mt-2">
+          <label for="stockXl">Stock Taille XL</label>
+          <input
+            type="number"
+            name="stockXl"
+            id="stockXl"
+            [(ngModel)]="product.stockXl"
+            required
+            #stockXl
+            min="1"
+            class="form-control"
+            [appValid]="stockXl.validity.valid"
+          />
+          <div class="invalid-feedback">Le stock du produit doit être au moins de 1!</div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <label for="price">Prix Unité</label>
+        <input
+          type="price"
+          name="price"
+          id="price"
+          [(ngModel)]="product.price"
+          required
+          #price
+          min="1"
+          class="form-control"
+          [appValid]="price.validity.valid"
+        />
+        <div class="invalid-feedback">Le prix unitaire du produit doit être au moins de 1!</div>
+      </div>
+      <div class="form-group mt-2">
+        <label for="description">Description</label>
+        <textarea
+          type="text"
+          name="description"
+          id="description"
+          [(ngModel)]="product.description"
+          required
+          #description
+          min="1"
+          rows="5"
+          class="form-control"
+          [appValid]="description.validity.valid"
+        ></textarea>
+        <div class="invalid-feedback">Veuillez saisir une description!</div>
+      </div>
+      <div class="form-group mt-2">
+        <label for="images">Images du Produit</label>
+        <input
+          type="file"
+          name="images"
+          id="images"
+          ngModel
+          multiple
+          class="form-control"
+          (change)="getImages($event)"
+        />
+      </div>
+      <hr />
+      <div class="form-group mt-2">
+        <p>Mevcut Resimler</p>
+        <span
+          (click)="deleteImage(product._id, i)"
+          *ngFor="let image of product.imageUrls; let i = index"
+        >
+          <img
+            [src]="'http://localhost:5000/' + image.path"
+            width="100"
+            height="130"
+            style="padding-left: 10px;"
+            class="mx-1"
+          />
+        </span>
+      </div>
+      <div class="form-group mt-2">
+        <button class="btn btn-dark w-100">Mettre à Jour</button>
+      </div>
+    </form>
+  </div>
+</div>

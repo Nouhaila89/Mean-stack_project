@@ -1,0 +1,29 @@
+span {
+    position: relative;
+    display: inline-block;
+  }
+  
+  span:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  
+  span:before,
+  span:after {
+    content: "";
+    position: absolute;
+    top: 8%;
+    left:90%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 2px;
+    background-color: black;
+  }
+  
+  span:before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  span:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }

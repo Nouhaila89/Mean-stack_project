@@ -1,0 +1,86 @@
+<section style="margin-top: 110px;">
+    <div class="container1">
+        <div class="categories-links">
+            <ul class="categories-list">
+                <li  (click)="changeCategory('','Tümü')"  class="center-list-item" [ngClass]="request.categoryName == 'Tümü' ? 'active' : ''">Tous</li>
+                <li (click)="changeCategory(category._id, category.name)" class="center-list-item" [ngClass]="request.categoryName == category.name ? 'active' : ''" *ngFor="let category of categories">
+                   {{category.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="product-wrapper">
+            <div style="display: flex;">
+                <div>
+                    <button (click)="toggleFilter()" style="width: 200px; margin-right: 690px;" class="btn btn-dark">Filtres</button>
+                </div>
+                <div class="mb-3" style="width: 1400px; margin-right: 10px;">
+                    <input type="search" [(ngModel)]="request.search" class="form-control" placeholder="Entrez la valeur à rechercher">
+                </div>
+                <div>
+                    <button style="width: 150px;" (click)="getAll()" class="btn btn-dark">Rechercher</button>
+                </div>
+            </div>
+            <ul class="product-list">
+                <li class="product-item" *ngFor="let product of products let i = index">
+                    <div class="product-image">
+                        <a routerLink="/product-single/{{product._id}}">
+                            <img [src]="'http://localhost:5000/' + product.imageUrls[0].path" alt="">
+                        </a>
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">{{product.name}}</a>
+                        <div class="product-price">
+                            <strong>{{product.price}} TL</strong>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div *ngIf="isFilterVisible" class="filter">
+        <div (click)="toggleFilter()" style="float: right; font-size: 20px; padding: 5px; cursor: pointer;"><i class="bi bi-x-lg"></i></div>
+        <div class="filter-wrapper">
+            <div>
+                <label for="" style="font-size: 30px;">Taille</label>
+                <div class="size">
+                    <input type="checkbox" (change)="toggleSizeFilter('S')">
+                    <p>S</p>
+                </div>
+                <div class="size">
+                    <input type="checkbox" (change)="toggleSizeFilter('M')">
+                    <p>M</p>
+                </div>
+                <div class="size">
+                    <input type="checkbox" (change)="toggleSizeFilter('L')">
+                    <p>L</p>
+                </div>
+                <div class="size">
+                    <input type="checkbox" (change)="toggleSizeFilter('XL')">
+                    <p>XL</p>
+                </div>
+            </div>
+            <div class="price-list">
+                <label for="" style="font-size: 30px;">Prix</label>
+                <div class="price">
+                    <input type="radio" name="price" (change)="togglePriceFilter(1, 4)">
+                    <p>1 TL - 4 TL</p>
+                </div>
+                <div class="price"> 
+                    <input type="radio" name="price" (change)="togglePriceFilter(5, 8)">
+                    <p>5 TL - 8 TL</p>
+                </div>
+                <div class="price">
+                    <input type="radio" name="price" (change)="togglePriceFilter(9, 13)">
+                    <p>9 TL - 13 TL</p>
+                </div>
+                <div class="price">
+                    <input type="radio" name="price" (change)="togglePriceFilter(14, 900)">
+                    <p>14 TL - 900 TL</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-dark" (click)="applyFilters()" style="margin-left: 20px; width: 90%;">Appliquer</button>
+        
+    </div>
+</section>

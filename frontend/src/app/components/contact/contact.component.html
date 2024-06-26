@@ -1,0 +1,38 @@
+<div style="margin-top: 91px;">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.7461082014345!2d-5.810761684760482!3d35.76727293471859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b87002f6bffcb%3A0x700cbe441b44ff24!2sTanger%2C%20Maroc!5e0!3m2!1sfr!2sfr!4v1710588099694!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<div class="container">
+    <div class="row contact-wrapper">
+        <div class="col-md-6">
+          <form #addForm="ngForm" autocomplete="off" (ngSubmit)="add(addForm)">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nom et Prénom</label>
+              <input type="text" class="form-control" required id="name" name="name" #name ngModel placeholder="" style="border-radius: 0;" [appValid]="name.validity.valid">
+              <div class="invalid-feedback">Le champ Nom et Prénom est obligatoire !</div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Adresse Email</label>
+              <input type="email" class="form-control" required id="email" name="email" #email ngModel placeholder="" style="border-radius: 0;" [appValid]="email.validity.valid">
+              <div class="invalid-feedback">Veuillez entrer une adresse email valide !</div>
+
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Votre Message</label>
+              <textarea class="form-control" id="message" required rows="3" name="message" #message ngModel style="border-radius: 0;" [appValid]="message.validity.valid"></textarea>
+              <div class="invalid-feedback">Le champ Message est obligatoire !</div>
+            </div>
+            <button class="btn btn-dark">Envoyer</button>
+          </form>
+        </div>
+        <div class="col-md-4 contact-adress">
+            <div>
+                <strong>Adresse :</strong>
+                <p>Zone industrielle n 787 , Tanger</p>
+                <strong>Téléphone :</strong>
+                <p>0555 555 55 55</p>
+                <strong>Horaires d'ouverture :</strong>
+                <p>Du lundi au vendredi de 9h à 17h</p>
+            </div>
+        </div>
+  </div>
+</div>
